@@ -2,7 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 const landing = require('../controllers/landing')
+const user = require('../controllers/user')
 
+// router.get('/login', user.show_login)
+router.get('/signup', user.show_signup)
 /* GET home page. */
 router.get('/', landing.get_landing);
 router.post('/', landing.submit_lead);

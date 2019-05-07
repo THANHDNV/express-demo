@@ -1,0 +1,30 @@
+doctype html
+html(lang='en')
+  include common/head.pug
+  +head('Log In')
+  body
+    header
+      include common/navbar.pug
+      +navbar()
+      .container
+        .row
+          .col-sm-12.offset-md-2.col-md-8
+            .jumbotron
+                h2.text-center Sign up
+                .row
+                    .col-sm-12.col-md-12
+                        form(method='POST' action='/login')
+                            .formgroup
+                                label.small.mb-1.mt-3 Email:
+                                input(placeholder='Enter your email', required=true, name='email', type='email', value='').form-control
+                                label.small.mb-1.mt-3 Password:
+                                input(placeholder='Enter your current Password', required='true', name='password', type='password', value='').form-control
+                                button.mt-3.btn-primary(type='submit') Log In
+                                p.mt-2.mb-0
+                                    | Forgot your password? #[a(href='#') Reset here]
+                                p.mb-0
+                                    | Already have an account? #[a(href='/login') Log in here]
+    include common/footer.pug
+    +footer()
+    script(src='/javascripts/leads.js')
+  
