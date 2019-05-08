@@ -1,7 +1,7 @@
 const models = require('../database/models')
 
 exports.get_landing = function(req, res, next) {
-    res.render('landing', { title: 'Express', user: req.user });
+    res.render('landing', { title: 'Express' });
 }
 
 exports.submit_lead = function(req, res, next) {

@@ -9,12 +9,11 @@ mixin navbar()
             li.nav-item
               a.nav-link(href='/leads') Leads
       .navbar-right
-        if session.passport
-          if session.passport.user
-            span.navbar-text Hello #{user.email}
+        if user
+          span.navbar-text Hello #{user.email}
       .navbar-right
         ul.navbar-nav.mr-auto
-          if !session.passport || !session.passport.user
+          if !user
             li.nav-item
               a.nav-link(href='/signup') Sign Up
             li.nav-item
