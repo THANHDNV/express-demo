@@ -4,8 +4,12 @@ var router = express.Router();
 const landing = require('../controllers/landing')
 const user = require('../controllers/user')
 
-// router.get('/login', user.show_login)
+router.get('/login', user.show_login)
 router.get('/signup', user.show_signup)
+router.post('/login', user.login)
+router.post('/signup', user.signup)
+router.post('/signout', user.logout)
+router.get('/signout', user.logout)
 /* GET home page. */
 router.get('/', landing.get_landing);
 router.post('/', landing.submit_lead);

@@ -1,10 +1,10 @@
 doctype html
 html(lang='en')
-  include common/head.pug
+  include ../common/head.pug
   +head('Sign Up')
   body
     header
-      include common/navbar.pug
+      include ../common/navbar.pug
       +navbar()
       .container
         .row
@@ -22,7 +22,7 @@ html(lang='en')
                                 button.mt-3.btn-primary(type='submit') Signup
                                 p.mt-2.mb-0
                                     | Already have an account? #[a(href='/login') Log in here]
-    include common/footer.pug
+    include ../common/footer.pug
     +footer()
     script(src='/javascripts/leads.js')
   

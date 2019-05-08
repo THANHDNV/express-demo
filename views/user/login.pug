@@ -1,16 +1,16 @@
 doctype html
 html(lang='en')
-  include common/head.pug
+  include ../common/head.pug
   +head('Log In')
   body
     header
-      include common/navbar.pug
+      include ../common/navbar.pug
       +navbar()
       .container
         .row
           .col-sm-12.offset-md-2.col-md-8
             .jumbotron
-                h2.text-center Sign up
+                h2.text-center Login
                 .row
                     .col-sm-12.col-md-12
                         form(method='POST' action='/login')
@@ -24,7 +24,7 @@ html(lang='en')
                                     | Forgot your password? #[a(href='#') Reset here]
                                 p.mb-0
                                     | Already have an account? #[a(href='/login') Log in here]
-    include common/footer.pug
+    include ../common/footer.pug
     +footer()
     script(src='/javascripts/leads.js')
   
