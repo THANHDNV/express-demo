@@ -29,7 +29,9 @@ app.use(passport.session())
 app.use(flash());
 
 app.use((req, res, next) => {
-  res.locals.session = req.session
+  if (req.user) {
+    res.locals.user = req.user
+  }
   next();
 })
 

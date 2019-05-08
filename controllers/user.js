@@ -31,7 +31,7 @@ module.exports = {
     logout: function(req, res, next) {
         req.logout();
         req.session.destroy()
-        req.redirect('/')
+        res.redirect('/')
     },
     signup: function(req, res, next) {
         let errors = {}
@@ -39,19 +39,34 @@ module.exports = {
             if (!isEmpty(errors)) {
                 return rerender_signup(errors, req, res, next)
             } else {
-                const newUser = models.User.build({
-                    email: req.body.email,
-                    password: generateHash(req.body.password)
-                })
-                return newUser.save().then(result => {
-                    passport.authenticate('local', {
-                        successRedirect: "/",
-                        failureRedirect: "/signup",
-                        failureFlash: true
-                    })(req, res, next)
-                }).catch(error => {
-                    console.log(error)
-                    res.redirect('/signup')
+                return models.user.findOne({
+                    where: {
+                        isAdmin: true
+                    }
+                }).then(user => {
+                    let newUser;
+                    if (user !== null) {
+                        newUser = models.User.build({
+                            email: req.body.email,
+                            password: generateHash(req.body.password)
+                        })
+                    } else {
+                        newUser = models.User.build({
+                            email: req.body.email,
+                            password: generateHash(req.body.password),
+                            isAdmin: true
+                        })
+                    }
+                    return newUser.save().then(result => {
+                        passport.authenticate('local', {
+                            successRedirect: "/",
+                            failureRedirect: "/signup",
+                            failureFlash: true
+                        })(req, res, next)
+                    }).catch(error => {
+                        console.log(error)
+                        res.redirect('/signup')
+                    })
                 })
             }
         })
