@@ -7,8 +7,9 @@ var passport = require('passport')
 var session = require('express-session')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var flash = require('connect-flash')
 
-require('./password_setup.js')(passport)
+require('./passport_setup.js')(passport)
 var app = express();
 
 // view engine setup
@@ -25,6 +26,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'big small secret'}))
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.session = req.session
+  next();
+})
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
