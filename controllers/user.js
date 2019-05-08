@@ -3,9 +3,15 @@ const bcrypt = require('bcrypt')
 const passport = require('passport')
 require('../passport_setup.js')(passport)
 const flash = require('connect-flash')
+const { validateUser } = require('../validators/signup')
+const { isEmpty } = require('lodash')
 
 const generateHash = (password) => {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
+}
+
+const rerender_signup = function(errors, req, res, next) {
+    res.render('user/signup', { formData: req.body, errors })
 }
 
 module.exports = {
@@ -28,19 +34,28 @@ module.exports = {
         req.redirect('/')
     },
     signup: function(req, res, next) {
-        const newUser = models.User.build({
-            email: req.body.email,
-            password: generateHash(req.body.password)
+        let errors = {}
+        return validateUser(errors, req).then(errors => {
+            if (!isEmpty(errors)) {
+                return rerender_signup(errors, req, res, next)
+            } else {
+                const newUser = models.User.build({
+                    email: req.body.email,
+                    password: generateHash(req.body.password)
+                })
+                return newUser.save().then(result => {
+                    passport.authenticate('local', {
+                        successRedirect: "/",
+                        failureRedirect: "/signup",
+                        failureFlash: true
+                    })(req, res, next)
+                }).catch(error => {
+                    console.log(error)
+                    res.redirect('/signup')
+                })
+            }
         })
-        return newUser.save().then(result => {
-            passport.authenticate('local', {
-                successRedirect: "/",
-                failureRedirect: "/signup",
-                failureFlash: true
-            })(req, res, next)
-        }).catch(error => {
-            console.log(error)
-            res.redirect('/signup')
-        })
+
+        
     },
 }
