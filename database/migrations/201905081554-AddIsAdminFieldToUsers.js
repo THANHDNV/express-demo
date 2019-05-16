@@ -28,8 +28,7 @@ module.exports = {
             columnAndTypes.map(c => {
                 return queryInterface.removeColumn(
                     'Users',
-                    c.name,
-                    c.type(Sequelize)
+                    c.name
                 )
             })
         )
