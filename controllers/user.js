@@ -39,7 +39,7 @@ module.exports = {
             if (!isEmpty(errors)) {
                 return rerender_signup(errors, req, res, next)
             } else {
-                return models.user.findOne({
+                return models.User.findOne({
                     where: {
                         isAdmin: true
                     }

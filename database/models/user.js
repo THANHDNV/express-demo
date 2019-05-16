@@ -32,6 +32,14 @@ module.exports = (sequelize, DataTypes) => {
         isAdmin: {
             type: DataTypes.BOOLEAN,
             allowNull: true,
+        },
+        SocialType: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        SocialId: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
     })
 
