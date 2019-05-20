@@ -52,7 +52,7 @@ module.exports = function(passport) {
     passport.use( new facebookStrategy({
         clientID: config.facebook_api_key,
         clientSecret: config.facebook_api_secret,
-        callbackURL: config.callback_url,
+        callbackURL: config.facebook_callback_url,
         profileFields: ['id', 'emails', 'name']
     }, (accessToken, refreshToken, profile, done) => {
         console.log(profile)
