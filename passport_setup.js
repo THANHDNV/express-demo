@@ -1,5 +1,6 @@
 let localStrategy = require('passport-local').Strategy
 let facebookStrategy = require('passport-facebook').Strategy
+let googleStrategy = require('passport-google-oauth').OAuth2Strategy
 const config = require('./config/config')
 
 let bcrypt = require('bcrypt')
@@ -76,12 +77,42 @@ module.exports = function(passport) {
                     return done(null, newUser)
                 })
             } else {
-                console.log(user)
                 return done(null, user)
             }
         }).catch(err => {
             return done(err, null)
         })
-        
+    }))
+    passport.use (new googleStrategy({
+        clientID: config.google_client_id,
+        clientSecret: config.google_secret,
+        callbackURL: config.google_callback
+    }, (accessToken, refreshToken, profile, done) => {
+        console.log(profile)
+        if (!profile.id) {
+            return done(null, false)
+        }
+        models.User.findOne({
+            where: {
+                SocialId: profile.id,
+                SocialType: 'google'
+            }
+        }).then(user => {
+            if (!user) {
+                let newUser = models.User.build({
+                    email: profile.emails[0].value,
+                    password: accessToken,
+                    SocialType: 'google',
+                    SocialId: profile.id
+                })
+                return newUser.save().then(result => {
+                    return done(null, newUser)
+                })
+            } else {
+                return done(null, user)
+            }
+        }).catch(error => {
+            return done(error, null)
+        })
     }))
 }
