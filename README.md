@@ -16,6 +16,7 @@ Additional dependencies were added to the web app to improve functionality, incl
 
 ## Roadmap
 The application will be upgraded to include:
+* JWT fot persistent login
 * Real-time change
 * Web app security
 
