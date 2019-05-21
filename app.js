@@ -7,9 +7,11 @@ var passport = require('passport')
 var session = require('express-session')
 var flash = require('connect-flash')
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var fbRouter = require('./routes/fb')
+let indexRouter = require('./routes/index');
+let usersRouter = require('./routes/users');
+let fbRouter = require('./routes/fb')
+let ggRouter = require('./routes/google')
+
 
 require('./passport_setup.js')(passport)
 var app = express();
@@ -40,6 +42,7 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/facebook', fbRouter)
+app.use('/google', ggRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
