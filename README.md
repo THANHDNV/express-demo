@@ -11,11 +11,11 @@ The application was first created by express-generator. The general settings for
 Additional dependencies were added to the web app to improve functionality, including:
 * Data management and storing with SQLite using Sequelize
 * Authentication with passport Local Strategy
+* Authentication with Facebook and Google
 * Simple access control middleware
 
 ## Roadmap
 The application will be upgraded to include:
-* Authentication with Facebook and Google
 * Real-time change
 * Web app security
 
