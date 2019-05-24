@@ -10,10 +10,30 @@ module.exports = {
             issuer: options.issuer,
             subject: options.subject,
             audience: options.audience,
-            notBefore: Date.now()
+            notBefore: Date.now(),
+            expiresIn: "2d",
         }
-        return jwt.sign(payload, privateKey, {
-            
+        return jwt.sign(payload, privateKey, signOptions)
+    },
+
+    verify: (token, options) => {
+        let verifyOptions = {
+            issuer: options.issuer,
+            subject: options.subject,
+            audience: options.audience,
+            notBefore: Date.now(),
+            expiresIn: "2d",
+        }
+        try {
+            return jwt.verify(token, publicKey, verifyOptions)
+        } catch (error) {
+            return false
+        }
+    },
+
+    decode: (token) => {
+        return jwt.decode(token, {
+            complete: true
         })
     }
 }
