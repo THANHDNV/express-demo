@@ -15,10 +15,7 @@
     "express": "~4.16.1",
     "express-session": "^1.16.1",
     "http-errors": "~1.6.3",
-<<<<<<< HEAD
-=======
     "jsonwebtoken": "^8.5.1",
->>>>>>> 2f1e07c6bc5247b72353378e3b75663653f793c5
     "lodash": "^4.17.11",
     "morgan": "~1.9.1",
     "passport": "^0.4.0",

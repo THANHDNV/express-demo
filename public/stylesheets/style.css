@@ -6,8 +6,6 @@ body {
 a {
   color: #00B7FF;
 }
-<<<<<<< HEAD
-=======
 
 /* Shared */
 .loginBtn {
@@ -72,4 +70,3 @@ a {
 .loginBtnGoogle:focus {
   background: #E74B37;
 }
->>>>>>> 2f1e07c6bc5247b72353378e3b75663653f793c5

@@ -22,12 +22,9 @@ module.exports = {
         res.render('user/signup', { formData: {}, errors: {}})
     },
     login: function(req, res, next) {
-<<<<<<< HEAD
-=======
         if (req.params.submit) {
             res.redirect('/' + req.params.submit)
         }
->>>>>>> 2f1e07c6bc5247b72353378e3b75663653f793c5
         passport.authenticate('local', {
             successRedirect:"/",
             failureRedirect:"/login",
