@@ -20,10 +20,23 @@ html(lang='en')
                                 label.small.mb-1.mt-3 Password:
                                 input(placeholder='Enter your current Password', required='true', name='password', type='password', value='').form-control
                                 button.mt-3.btn-primary(type='submit') Log In
+<<<<<<< HEAD
                                 p.mt-2.mb-0
                                     | Forgot your password? #[a(href='#') Reset here]
                                 p.mb-0
                                     | Already have an account? #[a(href='/login') Log in here]
+=======
+                        form(method='GET' action='/facebook')
+                          .formgroup
+                            button.loginBtn.loginBtnFacebook(type='submit') Login with Facebook
+                        form(method='GET' action='/google')
+                          .formgroup
+                            button.loginBtn.loginBtnGoogle(type='submit') Login with Google
+                        p.mt-2.mb-0
+                            | Forgot your password? #[a(href='#') Reset here]
+                        p.mb-0
+                            | Already have an account? #[a(href='/login') Log in here]
+>>>>>>> 2f1e07c6bc5247b72353378e3b75663653f793c5
     include ../common/footer.pug
     +footer()
     script(src='/javascripts/leads.js')

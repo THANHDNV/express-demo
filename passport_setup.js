@@ -2,6 +2,11 @@ let localStrategy = require('passport-local').Strategy
 let facebookStrategy = require('passport-facebook').Strategy
 let googleStrategy = require('passport-google-oauth').OAuth2Strategy
 const config = require('./config/config')
+<<<<<<< HEAD
+=======
+const Op = require('sequelize').Op
+
+>>>>>>> 2f1e07c6bc5247b72353378e3b75663653f793c5
 
 let bcrypt = require('bcrypt')
 let models = require('./database/models')
@@ -62,8 +67,20 @@ module.exports = function(passport) {
         }
         return models.User.findOne({
             where: {
+<<<<<<< HEAD
                 SocialId: profile.id,
                 SocialType: 'fb'
+=======
+                [Op.or]: [
+                    {
+                        SocialId: profile.id,
+                        SocialType: 'fb'
+                    },
+                    {
+                        email: profile.emails[0].value
+                    }
+                ]
+>>>>>>> 2f1e07c6bc5247b72353378e3b75663653f793c5
             }
         }).then(user => {
             if (!user) {
@@ -94,8 +111,20 @@ module.exports = function(passport) {
         }
         models.User.findOne({
             where: {
+<<<<<<< HEAD
                 SocialId: profile.id,
                 SocialType: 'google'
+=======
+                [Op.or]: [
+                    {
+                        SocialId: profile.id,
+                        SocialType: 'google'
+                    },
+                    {
+                        email: profile.emails[0].value
+                    }
+                ]
+>>>>>>> 2f1e07c6bc5247b72353378e3b75663653f793c5
             }
         }).then(user => {
             if (!user) {
