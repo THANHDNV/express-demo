@@ -11,6 +11,17 @@ module.exports = {
             successRedirect:'/',
             failureRedirect:'/login',
             scope:['email']
+        }, (error, user) => {
+            if (error) {
+                res.redirect('/login')
+            } else {
+                const token = jwt.sign({
+                    username: user.email
+                })
+                res.cookie('token',token, {
+                    maxAge: 86400 * 2
+                }).redirect('/')
+            }
         })(req,res,next)
     }
 }

@@ -4,7 +4,6 @@ let googleStrategy = require('passport-google-oauth').OAuth2Strategy
 const config = require('./config/config')
 const Op = require('sequelize').Op
 
-
 let bcrypt = require('bcrypt')
 let models = require('./database/models')
 
