@@ -7,9 +7,9 @@ const privateKey = fs.readFileSync('./key/private.key', 'utf8')
 module.exports = {
     sign: (payload, options) => {
         let signOptions = {
-            issuer: options ? options.issuer : null,
-            subject: options ? options.subject : null,
-            audience: options ? options.audience : null,
+            issuer: options ? options.issuer : '',
+            subject: options ? options.subject : '',
+            audience: options ? options.audience : '',
             expiresIn: '2d',
             notBefore: Date.now()
         }
@@ -18,9 +18,9 @@ module.exports = {
 
     verify: (token, options) => {
         let verifyOptions = {
-            issuer: options ? options.issuer : null,
-            subject: options ? options.subject : null,
-            audience: options ? options.audience : null,
+            issuer: options ? options.issuer : '',
+            subject: options ? options.subject : '',
+            audience: options ? options.audience : '',
             expiresIn: '2d',
             notBefore: Date.now()
         }
