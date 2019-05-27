@@ -4,8 +4,17 @@ let googleStrategy = require('passport-google-oauth').OAuth2Strategy
 const config = require('./config/config')
 const Op = require('sequelize').Op
 
+const crypto = require('crypto')
 let bcrypt = require('bcrypt')
 let models = require('./database/models')
+
+const decrypt = function(text) {
+    let encryptedText = Buffer.from(text, 'hex');
+    let decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(new Buffer('ThiSiSaRaNdOmkeYThiSiSaRaNdOmkeY')), new Buffer('tHIsIsACIpHErtHI'));
+    let decrypted = decipher.update(encryptedText);
+    decrypted = Buffer.concat([decrypted, decipher.final()]);
+    return decrypted.toString();
+}
 
 const validPassword = function(user, password) {
     return bcrypt.compareSync(password, user.password)
@@ -52,9 +61,9 @@ module.exports = function(passport) {
     }))
     
     passport.use( new facebookStrategy({
-        clientID: config.facebook_api_key,
-        clientSecret: config.facebook_api_secret,
-        callbackURL: config.facebook_callback_url,
+        clientID: config ? config.facebook_api_key : decrypt(process.env.FB_KEY) ,
+        clientSecret: config ? config.facebook_api_secret : decrypt(process.env.FB_SECRET),
+        callbackURL: config ? config.facebook_callback_url : 'https://localhost/fb/callback',
         profileFields: ['id', 'emails', 'name']
     }, (accessToken, refreshToken, profile, done) => {
         console.log(profile)
@@ -92,9 +101,9 @@ module.exports = function(passport) {
         })
     }))
     passport.use (new googleStrategy({
-        clientID: config.google_client_id,
-        clientSecret: config.google_secret,
-        callbackURL: config.google_callback
+        clientID: config ? config.google_api_key : decrypt(process.env.GG_KEY) ,
+        clientSecret: config ? config.google_api_secret : decrypt(process.env.GG_SECRET),
+        callbackURL: config ? config.facebook_callback_url : 'https://localhost/fb/callback',
     }, (accessToken, refreshToken, profile, done) => {
         console.log(profile)
         if (!profile.id) {
