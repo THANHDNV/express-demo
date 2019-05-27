@@ -4,7 +4,7 @@ let googleStrategy = require('passport-google-oauth').OAuth2Strategy
 try {
     const config = require('./config/config')
 } catch (error) {
-    
+    const config = null
 }
 const Op = require('sequelize').Op
 
