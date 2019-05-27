@@ -1,7 +1,11 @@
 let localStrategy = require('passport-local').Strategy
 let facebookStrategy = require('passport-facebook').Strategy
 let googleStrategy = require('passport-google-oauth').OAuth2Strategy
-const config = require('./config/config')
+try {
+    const config = require('./config/config')
+} catch (error) {
+    
+}
 const Op = require('sequelize').Op
 
 const crypto = require('crypto')
