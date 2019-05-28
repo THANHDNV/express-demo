@@ -3,8 +3,9 @@ require('../passport_setup')(passport)
 
 module.exports = {
     login: function(req, res, next)  {
-        passport.authenticate('facebook', {scope:['email']}, (error,user) => {
-            req.redirect('/fb/callback')
+        passport.authenticate('facebook', {
+            scope:['email'],
+            callbackURL: '/facebook/callback'
         })(req, res, next)
     },
 
@@ -12,6 +13,7 @@ module.exports = {
         passport.authenticate('facebook', {
             successRedirect:'/',
             failureRedirect:'/login',
+            callbackURL: '/facebook/callback',
             scope:['email']
         })(req,res,next)
     }

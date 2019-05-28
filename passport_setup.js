@@ -69,7 +69,6 @@ module.exports = function(passport) {
     passport.use( new facebookStrategy({
         clientID: config ? config.facebook_api_key : decrypt(process.env.FB_KEY) ,
         clientSecret: config ? config.facebook_api_secret : decrypt(process.env.FB_SECRET),
-        callbackURL: config ? config.facebook_callback_url : 'https://localhost/fb/callback',
         profileFields: ['id', 'emails', 'name']
     }, (accessToken, refreshToken, profile, done) => {
         console.log(profile)
@@ -107,9 +106,8 @@ module.exports = function(passport) {
         })
     }))
     passport.use (new googleStrategy({
-        clientID: config ? config.google_api_key : decrypt(process.env.GG_KEY) ,
-        clientSecret: config ? config.google_api_secret : decrypt(process.env.GG_SECRET),
-        callbackURL: config ? config.facebook_callback_url : 'https://localhost/fb/callback',
+        clientID: config ? config.google_client_id : decrypt(process.env.GG_KEY),
+        clientSecret: config ? config.google_secret : decrypt(process.env.GG_SECRET),
     }, (accessToken, refreshToken, profile, done) => {
         console.log(profile)
         if (!profile.id) {
