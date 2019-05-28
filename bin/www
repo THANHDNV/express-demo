@@ -6,7 +6,7 @@
 
 var app = require('../app');
 var debug = require('debug')('express-demo:server');
-var https = require('https');
+var http = require('http');
 let models = require('../database/models')
 
 /**
@@ -20,7 +20,7 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = https.createServer(app);
+var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
