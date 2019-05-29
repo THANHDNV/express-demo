@@ -8,6 +8,8 @@ exports.submit_lead = function(req, res, next) {
     return models.Lead.create({
         email: req.body.lead_email
     }).then(lead => {
+        let io = req.app.get('socketio')
+        io.sockets.emit('add_data', JSON.stringify(lead))
         res.redirect('/leads')
     })
 }
@@ -46,6 +48,8 @@ exports.edit_lead = function(req, res, next) {
             id: req.params.lead_id
         }
     }).then(result => {
+        let io = req.app.get('socketio')
+        io.sockets.emit('update_data', JSON.stringify(result))
         res.redirect('/lead/' + req.params.lead_id)
     })
 }
@@ -56,6 +60,8 @@ exports.delete_lead = function(req,res,next) {
             id: req.params.lead_id
         }
     }).then(result => {
+        let io = req.app.get('socketio')
+        io.sockets.emit('delete_data', JSON.stringify(result))
         res.redirect('/leads')
     })
 }
@@ -66,6 +72,8 @@ exports.delete_lead_json = function(req,res,next) {
             id: req.params.lead_id
         }
     }).then(result => {
+        let io = req.app.get('socketio')
+        io.sockets.emit('delete_data', JSON.stringify(result))
         res.send({ msg: 'Success'})
     })
 }

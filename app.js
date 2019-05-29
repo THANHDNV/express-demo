@@ -6,6 +6,8 @@ var logger = require('morgan');
 var passport = require('passport')
 var session = require('express-session')
 var flash = require('connect-flash')
+var http = require('http')
+var socketIo = require('socket.io')
 
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');

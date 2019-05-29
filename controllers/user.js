@@ -26,20 +26,9 @@ module.exports = {
             res.redirect('/' + req.params.submit)
         }
         passport.authenticate('local', {
-            // successRedirect:"/",
-            // failureRedirect:"/login",
+            successRedirect:"/",
+            failureRedirect:"/login",
             failureFlash: true
-        }, (error, user) => {
-            if (error) {
-                res.redirect('/login')
-            } else {
-                const token = jwt.sign({
-                    username: user.email
-                })
-                res.cookie('token',token, {
-                    maxAge: 86400 * 2
-                }).redirect('/')
-            }
         })(req, res, next)
     },
     logout: function(req, res, next) {
@@ -73,20 +62,9 @@ module.exports = {
                     }
                     return newUser.save().then(result => {
                         passport.authenticate('local', {
-                            // successRedirect: "/",
-                            // failureRedirect: "/signup",
+                            successRedirect: "/",
+                            failureRedirect: "/signup",
                             failureFlash: true
-                        }, (error, user) => {
-                            if (error) {
-                                res.redirect('/signup')
-                            } else {
-                                const token = jwt.sign({
-                                    username: user.email
-                                })
-                                res.cookie('token',token, {
-                                    maxAge: 86400 * 2
-                                }).redirect('/')
-                            }
                         })(req, res, next)
                     }).catch(error => {
                         console.log(error)
@@ -95,7 +73,5 @@ module.exports = {
                 })
             }
         })
-
-        
     },
 }
