@@ -13,10 +13,10 @@ Additional dependencies were added to the web app to improve functionality, incl
 * Authentication with passport Local Strategy
 * Authentication with Facebook and Google
 * Simple access control middleware
+* Real-time change with Socket.IO
 
 ## Roadmap
 The application will be upgraded to include:
-* Real-time change
 * Web app security
 
 ## Support
